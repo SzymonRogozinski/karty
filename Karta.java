@@ -3,10 +3,10 @@ package com.company;
 import java.util.*;
 
 public class Karta implements Comparable <Karta> {
-    final private String[] lista_wartosci ={"Dwójka","Trójka","Czwórka","Piątka","Szóstka","Siódemka",
+    final String[] lista_wartosci ={"Dwójka","Trójka","Czwórka","Piątka","Szóstka","Siódemka",
             "Ósemka","Dziewiątka","Dziesiątka","Jopek","Królowa","Król","As","Joker"}; //Tablica sotępny wartości
     //Plus dwa kolory dla jokera Czarny i Czerwony
-    final private String[] lista_kolorow={"Pik","Kier","Karo","Trefl"}; //Tablica dostępnych kolorów
+    final String[] lista_kolorow={"Pik","Kier","Karo","Trefl"}; //Tablica dostępnych kolorów
     final private String kolor;
     final private String wartosc;
 
@@ -43,12 +43,21 @@ public class Karta implements Comparable <Karta> {
     public String getWartosc() {
         return wartosc;
     }
+
     //Przekształca wartość karty na liczbę
     public int getWaga(){
         for(int i=0;i<lista_wartosci.length;i++)
             if(lista_wartosci[i].equals(wartosc))
                 return i;
         throw new ArrayIndexOutOfBoundsException("Nie odnaleziono wagi!");
+    }
+
+    //Przekształca wartość Koloru na liczbę
+    public int getWagaKolor(){
+        for(int i=0;i<lista_kolorow.length;i++)
+            if(lista_kolorow[i].equals(kolor))
+                return i;
+        throw new ArrayIndexOutOfBoundsException("Nie odnaleziono koloru!");
     }
 
     @Override
@@ -58,6 +67,13 @@ public class Karta implements Comparable <Karta> {
 
     @Override
     public int compareTo(Karta k){
-        return this.getWaga()-k.getWaga();
+        int r= this.getWaga()-k.getWaga();
+        if(r==0){
+            if(this.wartosc.equals("Joker")){
+                return kolor.equals("Czarny") ? 1:0;
+            }else
+                return this.getWagaKolor()-k.getWagaKolor();
+        }
+        return r;
     }
 }

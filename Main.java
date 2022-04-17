@@ -3,7 +3,11 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	    Karta S=new Karta("Czarny", "Joker");
-        System.out.println(S);
+	    FabrykaKart f=new FabrykaKart();
+        Tasowanie S=new Sortowanie();
+        Karta[] k=f.drukuj();
+        S.tasowanie(k);
+        for(Karta d :k)
+            System.out.println(d);
     }
 }
