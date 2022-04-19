@@ -2,7 +2,7 @@ package com.company;
 import java.util.*;
 
 public class Sortowanie implements Tasowanie {
-    public void tasowanie(Karta[] K){
-        Arrays.sort(K);
+    public void tasowanie(Karta[] Talia){
+        Arrays.sort(Talia);
     }
 }
